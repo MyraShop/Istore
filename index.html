@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPhone - Think Different</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+
+<style>
+
+  /* ── Root palette ── */
+  :root {
+    --bg:          #0f0f0f;       /* near-black page background  */
+    --surface:     #1a1a1a;       /* card background              */
+    --border:      #2a2a2a;       /* subtle borders               */
+    --accent:      #e8ff47;       /* sharp yellow-green accent    */
+    --accent-soft: #c8e63a;       /* slightly darker accent       */
+    --text-main:   #f0f0f0;       /* primary text                 */
+    --text-muted:  #888888;       /* secondary / label text       */
+    --wa-green:    #25d366;
+    --wa-hover:    #1ebe5d;
+  }
+
+  /* ── Base reset ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text-main);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background-color: #111111;
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 68px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  /* Logo / brand */
+  .header-logo {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    text-decoration: none;
+  }
+
+  .header-logo .brand-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.35rem;
+    color: var(--text-main);
+    letter-spacing: -0.5px;
+  }
+
+  .header-logo .brand-dot {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.35rem;
+    color: var(--accent);
+  }
+
+  .header-logo .brand-sub {
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-left: 2px;
+  }
+
+  /* Nav links */
+  .header-nav {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .header-nav a {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: color 0.2s;
+  }
+
+  .header-nav a:hover { color: var(--text-main); }
+
+  .header-nav .nav-cta {
+    background: var(--accent);
+    color: #0f0f0f;
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: background 0.2s;
+  }
+
+  .header-nav .nav-cta:hover {
+    background: var(--accent-soft);
+    color: #0f0f0f;
+  }
+
+  /* Mobile: hide nav links on small screens */
+  @media (max-width: 600px) {
+    .site-header { padding: 0 20px; }
+    .header-nav  { gap: 16px; }
+    .header-nav li:not(:last-child) { display: none; }
+  }
+
+  /* ── PAGE WRAPPER ── */
+  .showcase-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 52px 24px 80px;
+  }
+
+  .showcase-page h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 2.6rem;
+    letter-spacing: -1px;
+    color: var(--text-main);
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  /* accent word highlight */
+  .showcase-page h1 span {
+    color: var(--accent);
+  }
+
+  .showcase-page .subtitle {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin-bottom: 52px;
+  }
+
+  /* ── SERIES CARDS — dark theme override ── */
+  .iphone-series {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 40px 36px;
+    margin-bottom: 28px;
+    box-shadow: none;
+    transition: border-color 0.25s;
+  }
+
+  .iphone-series:hover {
+    border-color: #3a3a3a;
+    box-shadow: none;
+  }
+
+  .series-header {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .series-header h2 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    color: var(--text-main);
+  }
+
+  .series-year {
+    background: #222;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+  }
+
+  /* Labels */
+  .selector-group label {
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+  }
+
+  /* Model pills */
+  .model-pill {
+    background: #222;
+    border-color: var(--border);
+    color: var(--text-main);
+  }
+
+  .model-pill:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .model-pill.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #0f0f0f;
+    font-weight: 600;
+  }
+
+  /* Storage pills — same styling, green active */
+  [data-series$="-storage"] .model-pill.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #0f0f0f;
+  }
+
+  /* Selection summary */
+  .selection-summary {
+    background: #222;
+    color: var(--text-muted);
+    border-radius: 10px;
+  }
+
+  .selection-summary strong { color: var(--accent); }
+
+  /* Swatch label */
+  .swatch-label { color: var(--text-muted); }
+
+  /* Buy button */
+  .buy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    margin-top: 8px;
+    padding: 13px 26px;
+    background: var(--wa-green);
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    width: fit-content;
+  }
+
+  .buy-btn:hover {
+    background: var(--wa-hover);
+    transform: translateY(-2px);
+  }
+
+  .buy-btn:active { transform: translateY(0); }
+
+  /* Image block */
+  .Images {
+    aspect-ratio: 3/4;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #222;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed var(--border);
+    position: relative;
+  }
+
+  .Images img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  .Images span {
+    position: absolute;
+    font-size: 0.82rem;
+    color: #555;
+  }
+
+  .Images img ~ span { display: none; }
+
+</style>
+
+<header class="site-header">
+
+  <a class="header-logo" href="#">
+    <span class="brand-name">iStore</span><span class="brand-dot">.</span>
+    <span class="brand-sub">Premium iPhones</span>
+  </a>
+
+  <nav>
+    <ul class="header-nav">
+      <li><a href="+23765158459" class="nav-cta">Contact Us</a></li>
+    </ul>
+  </nav>
+
+
+</header>
+  </head>
+  <body>
+   
+
+<style>
+  /* ── image siz ── */
+  .Images {
+  aspect-ratio: 3/4;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #f0f0f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #d1d1d6;
+  position: relative;
+}
+
+.Images img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.Images span {
+  position: absolute;
+  font-size: 0.85rem;
+  color: #aeaeb2;
+}
+
+/* Hide the placeholder text once an image is present */
+.Images img ~ span {
+  display: none;
+}
+  /* ── Fonts ── */
+  @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;600&display=swap');
+
+  /* ── Reset / Base ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    background: #f5f5f7;
+    color: #1d1d1f;
+  }
+
+  /* ── Page wrapper ── */
+  .showcase-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  .showcase-page h1 {
+    font-size: 2.4rem;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+
+  .showcase-page .subtitle {
+    text-align: center;
+    color: #6e6e73;
+    font-size: 1.05rem;
+    margin-bottom: 56px;
+  }
+
+  /* ── iPhone Series Card ── */
+  .iphone-series {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 40px 36px;
+    margin-bottom: 32px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+    transition: box-shadow 0.25s ease;
+  }
+
+  .iphone-series:hover {
+    box-shadow: 0 6px 28px rgba(0,0,0,0.11);
+  }
+
+  /* Series header */
+  .series-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e5e5ea;
+  }
+
+  .series-header h2 {
+    font-size: 1.55rem;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+  }
+
+  .series-year {
+    font-size: 0.85rem;
+    color: #6e6e73;
+    background: #f5f5f7;
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+
+  /* ── Two-column layout inside each card ── */
+  .series-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+
+  @media (max-width: 640px) {
+    .series-body { grid-template-columns: 1fr; }
+  }
+
+  /* Image placeholder */
+  .phone-image-wrap {
+    aspect-ratio: 3/4;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #f0f0f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    color: #aeaeb2;
+    border: 2px dashed #d1d1d6;
+    position: relative;
+  }
+
+  .phone-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  /* ── Selectors panel ── */
+  .selectors-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .selector-group label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #6e6e73;
+    margin-bottom: 10px;
+  }
+
+  /* Model pills */
+  .model-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .model-pill {
+    padding: 7px 16px;
+    border-radius: 30px;
+    border: 1.5px solid #d1d1d6;
+    background: #fff;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    color: #1d1d1f;
+    font-family: inherit;
+  }
+
+  .model-pill:hover {
+    border-color: #0071e3;
+    color: #0071e3;
+  }
+
+  .model-pill.active {
+    background: #0071e3;
+    border-color: #0071e3;
+    color: #fff;
+  }
+
+  /* Color swatches */
+  .color-swatches {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .swatch {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2.5px solid transparent;
+    cursor: pointer;
+    transition: transform 0.18s ease, border-color 0.18s ease;
+    position: relative;
+    outline: none;
+  }
+
+  .swatch:hover { transform: scale(1.15); }
+
+  .swatch.active {
+    border-color: #0071e3;
+    transform: scale(1.15);
+    box-shadow: 0 0 0 3px rgba(0,113,227,0.25);
+  }
+
+  .swatch-label {
+    font-size: 0.82rem;
+    color: #6e6e73;
+    margin-left: 4px;
+  }
+
+  /* Selected info */
+  .selection-summary {
+    margin-top: 4px;
+    padding: 12px 16px;
+    background: #f5f5f7;
+    border-radius: 10px;
+    font-size: 0.88rem;
+    color: #3a3a3c;
+    min-height: 44px;
+  }
+
+  .selection-summary strong { color: #0071e3; }
+</style>
+
+
+<main class="showcase-page">
+
+<h1>iPhone Lineup</h1>
+  <p class="subtitle">Choose your model and color — Then place Your order 
+
+  <!-- iPhone 11 -->
+  <div class="iphone-series" id="series-11">
+    <div class="series-header">
+      <h2>iPhone 11</h2>
+      <span class="series-year">2019</span>
+    </div>
+    <div class="series-body">
+      <div class="Images" id="img-11">
+        <img src="Images/ip11.png"ipnone 11>
+        <span>Add iPhone 11 image</span>
+      </div>
+      <div class="selectors-panel">
+        <div class="selector-group">
+          <label>Model</label>
+          <div class="model-pills" data-series="11">
+            <button class="model-pill active" data-model="iPhone 11">iPhone 11</button>
+            <button class="model-pill" data-model="iPhone 11 Pro">iPhone 11 Pro</button>
+            <button class="model-pill" data-model="iPhone 11 Pro Max">iPhone 11 Pro Max</button>
+          </div>
+        </div>
+        <div class="selector-group">
+          <label>Color</label>
+          <div class="color-swatches" data-series="11">
+            <button class="swatch active" data-color="Black"   title="Black"   style="background:#1c1c1e;"></button>
+            <button class="swatch"        data-color="White"   title="White"   style="background:#f5f5f0; border:1.5px solid #d1d1d6;"></button>
+            <button class="swatch"        data-color="(PRODUCT)RED" title="RED" style="background:#c0392b;"></button>
+            <button class="swatch"        data-color="Yellow"  title="Yellow"  style="background:#f5d800;"></button>
+            <button class="swatch"        data-color="Purple"  title="Purple"  style="background:#9b59b6;"></button>
+            <button class="swatch"        data-color="Green"   title="Green"   style="background:#27ae60;"></button>
+            <span class="swatch-label" id="color-label-11">Black</span>
+          </div>
+        </div>
+        <div class="selection-summary" id="summary-11">
+          Selected: <strong>iPhone 11</strong> in <strong>Black</strong>
+        </div>
+        <div class="selector-group">
+          <label>Storage</label>
+          <div class="model-pills" data-series="11-storage">
+            <button class="model-pill active" data-model="64GB">64GB</button>
+            <button class="model-pill" data-model="128GB">128GB</button>
+            <button class="model-pill" data-model="256GB">256GB</button>
+          </div>
+        </div>
+        <a class="buy-btn" id="buy-11" href="#" target="_blank">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.532 5.859L.054 23.454a.75.75 0 0 0 .914.914l5.594-1.478A11.952 11.952 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.693-.528-5.222-1.444l-.374-.223-3.878 1.023 1.023-3.878-.223-.374A9.953 9.953 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+          </svg>
+          Order on WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- iPhone 12 -->
+  <div class="iphone-series" id="series-12">
+    <div class="series-header">
+      <h2>iPhone 12</h2>
+      <span class="series-year">2020</span>
+    </div>
+    <div class="series-body">
+      <div class="Images" id="img-12">
+        <img src="Images/ip12.jpg" alt="iPhone 12">
+        <span>Add iPhone 12 image</span>
+      </div>
+      <div class="selectors-panel">
+        <div class="selector-group">
+          <label>Model</label>
+          <div class="model-pills" data-series="12">
+            <button class="model-pill active" data-model="iPhone 12 mini">iPhone 12 mini</button>
+            <button class="model-pill" data-model="iPhone 12">iPhone 12</button>
+            <button class="model-pill" data-model="iPhone 12 Pro">iPhone 12 Pro</button>
+            <button class="model-pill" data-model="iPhone 12 Pro Max">iPhone 12 Pro Max</button>
+          </div>
+        </div>
+        <div class="selector-group">
+          <label>Color</label>
+          <div class="color-swatches" data-series="12">
+            <button class="swatch active" data-color="Black"   title="Black"   style="background:#1c1c1e;"></button>
+            <button class="swatch"        data-color="White"   title="White"   style="background:#f5f5f0; border:1.5px solid #d1d1d6;"></button>
+            <button class="swatch"        data-color="(PRODUCT)RED" title="RED" style="background:#c0392b;"></button>
+            <button class="swatch"        data-color="Blue"    title="Blue"    style="background:#2980b9;"></button>
+            <button class="swatch"        data-color="Green"   title="Green"   style="background:#27ae60;"></button>
+            <button class="swatch"        data-color="Purple"  title="Purple"  style="background:#8e44ad;"></button>
+            <span class="swatch-label" id="color-label-12">Black</span>
+          </div>
+        </div>
+        <div class="selection-summary" id="summary-12">
+          Selected: <strong>iPhone 12 mini</strong> in <strong>Black</strong>
+        </div>
+        <div class="selector-group">
+          <label>Storage</label>
+          <div class="model-pills" data-series="12-storage">
+            <button class="model-pill active" data-model="64GB">64GB</button>
+            <button class="model-pill" data-model="128GB">128GB</button>
+            <button class="model-pill" data-model="256GB">256GB</button>
+          </div>
+        </div>
+        <a class="buy-btn" id="buy-12" href="#" target="_blank">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.532 5.859L.054 23.454a.75.75 0 0 0 .914.914l5.594-1.478A11.952 11.952 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.693-.528-5.222-1.444l-.374-.223-3.878 1.023 1.023-3.878-.223-.374A9.953 9.953 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+          </svg>
+          Order on WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- iPhone 13 -->
+  <div class="iphone-series" id="series-13">
+    <div class="series-header">
+      <h2>iPhone 13</h2>
+      <span class="series-year">2021</span>
+    </div>
+    <div class="series-body">
+      <div class="Images" id="img-13">
+        <img src="Images/apple-iphone-13-3.jpg" alt="iPhone 13">
+        <span>Add iPhone 13 image</span>
+      </div>
+      <div class="selectors-panel">
+        <div class="selector-group">
+          <label>Model</label>
+          <div class="model-pills" data-series="13">
+            <button class="model-pill active" data-model="iPhone 13 mini">iPhone 13 mini</button>
+            <button class="model-pill" data-model="iPhone 13">iPhone 13</button>
+            <button class="model-pill" data-model="iPhone 13 Pro">iPhone 13 Pro</button>
+            <button class="model-pill" data-model="iPhone 13 Pro Max">iPhone 13 Pro Max</button>
+          </div>
+        </div>
+        <div class="selector-group">
+          <label>Color</label>
+          <div class="color-swatches" data-series="13">
+            <button class="swatch active" data-color="Midnight" title="Midnight" style="background:#1c1c2e;"></button>
+            <button class="swatch"        data-color="Starlight" title="Starlight" style="background:#f0ede6; border:1.5px solid #d1d1d6;"></button>
+            <button class="swatch"        data-color="(PRODUCT)RED" title="RED"  style="background:#c0392b;"></button>
+            <button class="swatch"        data-color="Blue"    title="Blue"    style="background:#2471a3;"></button>
+            <button class="swatch"        data-color="Pink"    title="Pink"    style="background:#f1948a;"></button>
+            <button class="swatch"        data-color="Green"   title="Green"   style="background:#1e8449;"></button>
+            <span class="swatch-label" id="color-label-13">Midnight</span>
+          </div>
+        </div>
+        <div class="selection-summary" id="summary-13">
+          Selected: <strong>iPhone 13 mini</strong> in <strong>Midnight</strong>
+        </div>
+        <div class="selector-group">
+          <label>Storage</label>
+          <div class="model-pills" data-series="13-storage">
+            <button class="model-pill active" data-model="128GB">128GB</button>
+            <button class="model-pill" data-model="256GB">256GB</button>
+            <button class="model-pill" data-model="512GB">512GB</button>
+          </div>
+        </div>
+        <a class="buy-btn" id="buy-13" href="#" target="_blank">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.532 5.859L.054 23.454a.75.75 0 0 0 .914.914l5.594-1.478A11.952 11.952 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.693-.528-5.222-1.444l-.374-.223-3.878 1.023 1.023-3.878-.223-.374A9.953 9.953 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+          </svg>
+          Order on WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- iPhone 14 -->
+  <div class="iphone-series" id="series-14">
+    <div class="series-header">
+      <h2>iPhone 14</h2>
+      <span class="series-year">2022</span>
+    </div>
+    <div class="series-body">
+      <div class="Images" id="img-14">
+        <img src="Images/ip14.jpg" alt="iPhone 14">
+        <span>Add iPhone 14 image</span>
+      </div>
+      <div class="selectors-panel">
+        <div class="selector-group">
+          <label>Model</label>
+          <div class="model-pills" data-series="14">
+            <button class="model-pill active" data-model="iPhone 14">iPhone 14</button>
+            <button class="model-pill" data-model="iPhone 14 Plus">iPhone 14 Plus</button>
+            <button class="model-pill" data-model="iPhone 14 Pro">iPhone 14 Pro</button>
+            <button class="model-pill" data-model="iPhone 14 Pro Max">iPhone 14 Pro Max</button>
+          </div>
+        </div>
+        <div class="selector-group">
+          <label>Color</label>
+          <div class="color-swatches" data-series="14">
+            <button class="swatch active" data-color="Midnight" title="Midnight" style="background:#1c1c2e;"></button>
+            <button class="swatch"        data-color="Starlight" title="Starlight" style="background:#f0ede6; border:1.5px solid #d1d1d6;"></button>
+            <button class="swatch"        data-color="(PRODUCT)RED" title="RED"  style="background:#c0392b;"></button>
+            <button class="swatch"        data-color="Blue"    title="Blue"    style="background:#1a5276;"></button>
+            <button class="swatch"        data-color="Purple"  title="Purple"  style="background:#7d3c98;"></button>
+            <button class="swatch"        data-color="Yellow"  title="Yellow"  style="background:#f4d03f;"></button>
+            <span class="swatch-label" id="color-label-14">Midnight</span>
+          </div>
+        </div>
+        <div class="selection-summary" id="summary-14">
+          Selected: <strong>iPhone 14</strong> in <strong>Midnight</strong>
+        </div>
+        <div class="selector-group">
+          <label>Storage</label>
+          <div class="model-pills" data-series="14-storage">
+            <button class="model-pill active" data-model="128GB">128GB</button>
+            <button class="model-pill" data-model="256GB">256GB</button>
+            <button class="model-pill" data-model="512GB">512GB</button>
+          </div>
+        </div>
+        <a class="buy-btn" id="buy-14" href="#" target="_blank">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.532 5.859L.054 23.454a.75.75 0 0 0 .914.914l5.594-1.478A11.952 11.952 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.693-.528-5.222-1.444l-.374-.223-3.878 1.023 1.023-3.878-.223-.374A9.953 9.953 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+          </svg>
+          Order on WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- iPhone 15 -->
+  <div class="iphone-series" id="series-15">
+    <div class="series-header">
+      <h2>iPhone 15</h2>
+      <span class="series-year">2023</span>
+    </div>
+    <div class="series-body">
+      <div class="Images" id="img-15">
+        <img src="Images/iphone_15_plus_hero.png" alt="iPhone 15">
+        <span>Add iPhone 15 image</span>
+      </div>
+      <div class="selectors-panel">
+        <div class="selector-group">
+          <label>Model</label>
+          <div class="model-pills" data-series="15">
+            <button class="model-pill active" data-model="iPhone 15">iPhone 15</button>
+            <button class="model-pill" data-model="iPhone 15 Plus">iPhone 15 Plus</button>
+            <button class="model-pill" data-model="iPhone 15 Pro">iPhone 15 Pro</button>
+            <button class="model-pill" data-model="iPhone 15 Pro Max">iPhone 15 Pro Max</button>
+          </div>
+        </div>
+        <div class="selector-group">
+          <label>Color</label>
+          <div class="color-swatches" data-series="15">
+            <button class="swatch active" data-color="Black"   title="Black"   style="background:#1c1c1e;"></button>
+            <button class="swatch"        data-color="Blue"    title="Blue"    style="background:#5d7ea8;"></button>
+            <button class="swatch"        data-color="Green"   title="Green"   style="background:#4a7c59;"></button>
+            <button class="swatch"        data-color="Yellow"  title="Yellow"  style="background:#e8c840;"></button>
+            <button class="swatch"        data-color="Pink"    title="Pink"    style="background:#e8a0a0;"></button>
+            <span class="swatch-label" id="color-label-15">Black</span>
+          </div>
+        </div>
+        <div class="selection-summary" id="summary-15">
+          Selected: <strong>iPhone 15</strong> in <strong>Black</strong>
+        </div>
+        <div class="selector-group">
+          <label>Storage</label>
+          <div class="model-pills" data-series="15-storage">
+            <button class="model-pill active" data-model="128GB">128GB</button>
+            <button class="model-pill" data-model="256GB">256GB</button>
+            <button class="model-pill" data-model="512GB">512GB</button>
+          </div>
+        </div>
+        <a class="buy-btn" id="buy-15" href="#" target="_blank">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.532 5.859L.054 23.454a.75.75 0 0 0 .914.914l5.594-1.478A11.952 11.952 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.693-.528-5.222-1.444l-.374-.223-3.878 1.023 1.023-3.878-.223-.374A9.953 9.953 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+          </svg>
+          Order on WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- iPhone 16 -->
+  <div class="iphone-series" id="series-16">
+    <div class="series-header">
+      <h2>iPhone 16</h2>
+      <span class="series-year">2024</span>
+    </div>
+    <div class="series-body">
+      <div class="Images" id="img-16">
+        <img src="Images/ip16.jpg" alt="iPhone 16">
+        <span>Add iPhone 16 image</span>
+      </div>
+      <div class="selectors-panel">
+        <div class="selector-group">
+          <label>Model</label>
+          <div class="model-pills" data-series="16">
+            <button class="model-pill active" data-model="iPhone 16">iPhone 16</button>
+            <button class="model-pill" data-model="iPhone 16 Plus">iPhone 16 Plus</button>
+            <button class="model-pill" data-model="iPhone 16 Pro">iPhone 16 Pro</button>
+            <button class="model-pill" data-model="iPhone 16 Pro Max">iPhone 16 Pro Max</button>
+          </div>
+        </div>
+        <div class="selector-group">
+          <label>Color</label>
+          <div class="color-swatches" data-series="16">
+            <button class="swatch active" data-color="Black"     title="Black"     style="background:#1c1c1e;"></button>
+            <button class="swatch"        data-color="White"     title="White"     style="background:#f5f5f0; border:1.5px solid #d1d1d6;"></button>
+            <button class="swatch"        data-color="Ultramarine" title="Ultramarine" style="background:#1a3a6e;"></button>
+            <button class="swatch"        data-color="Teal"      title="Teal"      style="background:#2e8b8b;"></button>
+            <button class="swatch"        data-color="Pink"      title="Pink"      style="background:#e8a0b0;"></button>
+            <span class="swatch-label" id="color-label-16">Black</span>
+          </div>
+        </div>
+        <div class="selection-summary" id="summary-16">
+          Selected: <strong>iPhone 16</strong> in <strong>Black</strong>
+        </div>
+        <div class="selector-group">
+          <label>Storage</label>
+          <div class="model-pills" data-series="16-storage">
+            <button class="model-pill active" data-model="128GB">128GB</button>
+            <button class="model-pill" data-model="256GB">256GB</button>
+            <button class="model-pill" data-model="512GB">512GB</button>
+            <button class="model-pill" data-model="1TB">1TB</button>
+          </div>
+        </div>
+        <a class="buy-btn" id="buy-16" href="#" target="_blank">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.532 5.859L.054 23.454a.75.75 0 0 0 .914.914l5.594-1.478A11.952 11.952 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.693-.528-5.222-1.444l-.374-.223-3.878 1.023 1.023-3.878-.223-.374A9.953 9.953 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+          </svg>
+          Order on WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- iPhone 17 -->
+  <div class="iphone-series" id="series-17">
+    <div class="series-header">
+      <h2>iPhone 17</h2>
+      <span class="series-year">2025</span>
+    </div>
+    <div class="series-body">
+      <div class="Images" id="img-17">
+        <img src="Images/ip17.jpg" alt="iPhone 17">
+        <span>Add iPhone 17 image</span>
+      </div>
+      <div class="selectors-panel">
+        <div class="selector-group">
+          <label>Model</label>
+          <div class="model-pills" data-series="17">
+            <button class="model-pill active" data-model="iPhone 17">iPhone 17</button>
+            <button class="model-pill" data-model="iPhone 17 Air">iPhone 17 Air</button>
+            <button class="model-pill" data-model="iPhone 17 Pro">iPhone 17 Pro</button>
+            <button class="model-pill" data-model="iPhone 17 Pro Max">iPhone 17 Pro Max</button>
+          </div>
+        </div>
+        <div class="selector-group">
+          <label>Color</label>
+          <div class="color-swatches" data-series="17">
+            <button class="swatch active" data-color="Black"   title="Black"   style="background:#1c1c1e;"></button>
+            <button class="swatch"        data-color="White"   title="White"   style="background:#f5f5f0; border:1.5px solid #d1d1d6;"></button>
+            <button class="swatch"        data-color="Sky Blue" title="Sky Blue" style="background:#87ceeb;"></button>
+            <button class="swatch"        data-color="Sand"    title="Sand"    style="background:#d4b896;"></button>
+            <button class="swatch"        data-color="Sage"    title="Sage"    style="background:#8fac8f;"></button>
+            <span class="swatch-label" id="color-label-17">Black</span>
+          </div>
+        </div>
+        <div class="selection-summary" id="summary-17">
+          Selected: <strong>iPhone 17</strong> in <strong>Black</strong>
+        </div>
+        <div class="selector-group">
+          <label>Storage</label>
+          <div class="model-pills" data-series="17-storage">
+            <button class="model-pill active" data-model="128GB">128GB</button>
+            <button class="model-pill" data-model="256GB">256GB</button>
+            <button class="model-pill" data-model="512GB">512GB</button>
+            <button class="model-pill" data-model="1TB">1TB</button>
+          </div>
+        </div>
+        <a class="buy-btn" id="buy-17" href="#" target="_blank">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.532 5.859L.054 23.454a.75.75 0 0 0 .914.914l5.594-1.478A11.952 11.952 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.693-.528-5.222-1.444l-.374-.223-3.878 1.023 1.023-3.878-.223-.374A9.953 9.953 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+          </svg>
+          Order on WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ============================================================
+     STYLES for the Buy Button
+     Add this to your CSS file
+     ============================================================
+
+.buy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 8px;
+  padding: 13px 24px;
+  background: #25d366;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: inherit;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.15s ease;
+  width: fit-content;
+}
+
+.buy-btn:hover {
+  background: #1ebe5d;
+  transform: translateY(-2px);
+}
+
+.buy-btn:active {
+  transform: translateY(0);
+}
+
+============================================================ -->
+
+
+<script>
+  // ── CHANGE THIS to your WhatsApp number (country code + number, no + or spaces) ──
+  var WA_NUMBER = "YOUR_WHATSAPP_NUMBER";
+  // Example for Pakistan: var WA_NUMBER = "923001234567";
+
+  var series = ["11","12","13","14","15","16","17"];
+
+  // ── Model pill clicks ──
+  document.querySelectorAll('.model-pills').forEach(function(group) {
+    group.querySelectorAll('.model-pill').forEach(function(pill) {
+      pill.addEventListener('click', function() {
+        group.querySelectorAll('.model-pill').forEach(function(p){ p.classList.remove('active'); });
+        pill.classList.add('active');
+        var s = group.dataset.series;
+        if (!s.includes('-storage')) updateAll(s);
+        else updateAll(s.replace('-storage',''));
+      });
+    });
+  });
+
+  // ── Color swatch clicks ──
+  document.querySelectorAll('.color-swatches').forEach(function(group) {
+    var s = group.dataset.series;
+    group.querySelectorAll('.swatch').forEach(function(swatch) {
+      swatch.addEventListener('click', function() {
+        group.querySelectorAll('.swatch').forEach(function(sw){ sw.classList.remove('active'); });
+        swatch.classList.add('active');
+        var label = document.getElementById('color-label-' + s);
+        if (label) label.textContent = swatch.dataset.color;
+        updateAll(s);
+      });
+    });
+  });
+
+  function getSelection(s) {
+    var modelPill    = document.querySelector('.model-pills[data-series="' + s + '"] .model-pill.active');
+    var storagePill  = document.querySelector('.model-pills[data-series="' + s + '-storage"] .model-pill.active');
+    var colorSwatch  = document.querySelector('.color-swatches[data-series="' + s + '"] .swatch.active');
+    return {
+      model   : modelPill   ? modelPill.dataset.model    : '—',
+      storage : storagePill ? storagePill.dataset.model  : '—',
+      color   : colorSwatch ? colorSwatch.dataset.color  : '—'
+    };
+  }
+
+  function updateAll(s) {
+    var sel = getSelection(s);
+
+    // Update summary text
+    var summary = document.getElementById('summary-' + s);
+    if (summary) {
+      summary.innerHTML = 'Selected: <strong>' + sel.model + '</strong> · <strong>' + sel.color + '</strong> · <strong>' + sel.storage + '</strong>';
+    }
+
+    // Update WhatsApp button link
+    var btn = document.getElementById('buy-' + s);
+    if (btn) {
+      var msg = 'Hi! I would like to order:\n'
+              + '📱 Model: '   + sel.model   + '\n'
+              + '🎨 Color: '   + sel.color   + '\n'
+              + '💾 Storage: ' + sel.storage + '\n'
+              + 'Please confirm availability and price. Thank you!';
+      btn.href = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg);
+    }
+  }
+
+  // ── Initialize all buttons on page load ──
+  series.forEach(function(s){ updateAll(s); });
+</script>
+</main>
+<script>
+  // ── Shared interactive logic for all series cards ──
+
+  document.querySelectorAll('.model-pills').forEach(function(group) {
+    var series = group.dataset.series;
+    group.querySelectorAll('.model-pill').forEach(function(pill) {
+      pill.addEventListener('click', function() {
+        group.querySelectorAll('.model-pill').forEach(function(p){ p.classList.remove('active'); });
+        pill.classList.add('active');
+        updateSummary(series);
+      });
+    });
+  });
+
+  document.querySelectorAll('.color-swatches').forEach(function(group) {
+    var series = group.dataset.series;
+    group.querySelectorAll('.swatch').forEach(function(swatch) {
+      swatch.addEventListener('click', function() {
+        group.querySelectorAll('.swatch').forEach(function(s){ s.classList.remove('active'); });
+        swatch.classList.add('active');
+        var label = document.getElementById('color-label-' + series);
+        if (label) label.textContent = swatch.dataset.color;
+        updateSummary(series);
+      });
+    });
+  });
+
+  function updateSummary(series) {
+    var modelPill  = document.querySelector('.model-pills[data-series="' + series + '"] .model-pill.active');
+    var colorSwatch = document.querySelector('.color-swatches[data-series="' + series + '"] .swatch.active');
+    var summary    = document.getElementById('summary-' + series);
+    if (!summary) return;
+    var model = modelPill  ? modelPill.dataset.model   : '—';
+    var color = colorSwatch ? colorSwatch.dataset.color : '—';
+    summary.innerHTML = 'Selected: <strong>' + model + '</strong> in <strong>' + color + '</strong>';
+  }
+</script>
+<script>
+  var WA_NUMBER = "237658091679";
+// e.g. var WA_NUMBER = "923001234567";
+</script>
+  </body>
+
+  <footer>
+    <style>
+    /* ===== FOOTER ===== */
+footer{
+    background:black;
+    color:white;
+    padding:30px;
+    margin-top:40px;
+}
+
+.footer-content{
+    max-width:1100px;
+    margin:auto;
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+    gap:20px;
+}
+
+footer h3{
+    margin-bottom:8px;
+}
+
+footer a{
+    color:#4CAF50;
+    text-decoration:none;
+}
+</style>
+</style>
+<div class="footer-content">
+
+<div>
+<h3>iPhone Store</h3>
+<p>Trusted iPhone seller with verified devices and fast support.</p>
+</div>
+
+<div>
+<h3>Contact</h3>
+<p>Email: samayraa06@gmail.com</p>
+<p>Phone: +237 6 58 09 16 79</p>
+</div>
+
+<div>
+<h3>Policy</h3>
+<p>Warranty on selected devices</p>
+<p>7-day replacement available</p>
+</div>
+
+<div>
+<h3>Designed by</h3>
+<p>Aboubakr Bilal</p>
+</div>
+
+</div>
+</footer>
+  
+</html>
